@@ -24,14 +24,17 @@ function Expenses(props) {
           selected={selectedYear}
           onSaveNewYEar={saveNewYearHandler}
         />
-        {filteredList.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        {/* if this && then that */}
+        {filteredList.length === 0 && <p>No expenses found.</p>}
+        {filteredList.length > 0 &&
+          filteredList.map((expense) => (
+            <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />
+          ))}
       </Card>
     </div>
   );
