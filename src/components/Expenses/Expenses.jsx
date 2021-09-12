@@ -17,6 +17,19 @@ function Expenses(props) {
     (expense) => selectedYear == expense.date.getFullYear()
   );
 
+  if (filteredList.length === 0) {
+    var expensesContent = <p>No expenses found.</p>;
+  } else {
+    expensesContent = filteredList.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
+
   return (
     <div>
       <Card className="expenses">
@@ -24,17 +37,7 @@ function Expenses(props) {
           selected={selectedYear}
           onSaveNewYEar={saveNewYearHandler}
         />
-        {/* if this && then that */}
-        {filteredList.length === 0 && <p>No expenses found.</p>}
-        {filteredList.length > 0 &&
-          filteredList.map((expense) => (
-            <ExpenseItem
-              key={expense.id}
-              title={expense.title}
-              amount={expense.amount}
-              date={expense.date}
-            />
-          ))}
+        {expensesContent}
       </Card>
     </div>
   );
